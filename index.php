@@ -63,7 +63,7 @@
     <div class = "row">
     <br><br>
         <center>
-            <img src = "logo.png" height = 80px width = 150px/>
+            <img src = "logo.png" alt = "CCS Logo" height = 80px width = 150px/>
         </center>
         <br><br><br>
     </div>
@@ -81,7 +81,7 @@
                         </div>
 
                     </div>
-                    <p align = "center">If you are the host of Reverse Coding, <a href = "host.php">Click here</a></p>
+                    <p class = "text-center">If you are the host of Reverse Coding, <a href = "host.php">Click here</a></p>
 
             <?php
                 }else{
@@ -92,7 +92,7 @@
                     </div>
 
                     <div class="panel-body">
-                        <form action = "start.php" role="form" method="post">
+                        <form action = "start.php" method="post">
                             <fieldset>
                                 <div class="form-group">
                                     <input class="form-control" placeholder="Team name" name="name" type="text" autofocus>
