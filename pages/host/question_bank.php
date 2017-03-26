@@ -6,9 +6,10 @@
     }else{
         echo "<script> window.location=\"http://reversecoding.ccstu.in\"; </script> ";
     }
+    
     $sql = "SELECT * FROM host where name = 'ccs_admin'";
-    $sql_part = "SELECT * FROM participants ORDER BY score DESC";
-    $result_part = $conn->query($sql_part);
+    $sql_ques = "SELECT * FROM question_bank";
+    $result_ques = $conn->query($sql_ques);
     $result = $conn->query($sql);
     if ($result->num_rows == 1) {
         $row = $result->fetch_assoc();
@@ -16,6 +17,7 @@
         $out_of_season = $row['open'];
         $phase = $row['phase'];
     }
+    
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -31,36 +33,22 @@
 <body>
     <div id="wrapper">
         <?php include('includes/sidebar.php'); ?>
+
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Reverse coding</h1>
+                    <h1 class="page-header">Question Bank</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->
             <div class = "row">
                 <div class = "col-md-12">
-                    <p>Welcome to Reverse coding host panel.</p>
+                    <p>Add new questions here. One of these questions will be allotted to the teams.</p>
                 </div>
 <div class = "col-md-12">
                 
-                <?php
-                    if(!$out_of_season){
-                ?>
-                <div class="alert alert-success">
-                            An event is going on currently. <?php if($phase == 1) {echo "<br><b>PHASE: CODING GOING ON</b></br>";}else{echo "<br><b>PHASE: DECODING GOING ON</b></br>";} ?>
-                </div>
-<?php
-            }else{
-?>
-<div class="alert alert-danger">
-                            No event if going on currently. Starting a new event will delete the previous records! <b>DO NOT START A NEW EVENT BEFORE DECLARING THE PREVIOUS RESULTS</b>
-                </div>
-                <?php
-            }
-                ?>
-
+                
                      </div>   
             </div>
             
@@ -71,7 +59,7 @@
                        ?>
     <div class="panel panel-default">
                         <div class="panel-heading">
-                            Participating Teams
+                            Questions List
                         </div>
                         <!-- /.panel-heading -->
                         
@@ -80,16 +68,13 @@
                             <div class="table-responsive">
                                 <table class="table">
                                     <thead>
-                                        <tr><th>Team Name</th><th>Member 1</th><th>Member 2</th><th>Program Uploaded?</th><th>Score</th>
+                                        <tr><th>Q. No.</th><th>Question</th></tr>
                                     </thead>
                                     <tbody>
                                        <?php
-                                            while($row = $result_part->fetch_assoc()) {
+                                            while($row = $result_ques->fetch_assoc()) {
                                                 $uploaded = "No";
-                                                if($row['code_submit'] == 1){
-                                                    $uploaded = "Yes";
-                                                }
-                                            echo "<tr><td><a href = 'submissions?team=".$row['team_name']."'>".$row['team_name']."</a></td><td>".$row['member1']."</td><td>".$row['member2']."</td><td>".$uploaded."</td><td>".$row['Score']."</td></tr>";
+                                                echo "<tr><td>".$row['ques_number']."</a></td><td>".$row['question']."</td></tr>";
                                          }
                                         ?>
                                 </table>
